@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Character {
+  id        String @id @default(uuid())
+  name      String @unique
+  coorX     Int
+  coorY     Int
+  tolerance Int
+}
+
+model GameSession {
+  id        Int      @id @default(autoincrement())
+  startTime DateTime @default(now())
+}
+
+model LeaderBoard {
+  id        Int      @id @default(autoincrement())
+  name      String
+  timeMs    Int
+  createdAt DateTime @default(now())
+}
