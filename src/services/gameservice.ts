@@ -47,7 +47,7 @@ async function validateCharacters(characterId: string, x: number, y: number) {
     return { isCorrect }
 }
 
-async function finishGameSession(sessionId: number, playerName: string) {
+async function finishGameSession(sessionId: number, playerName: string, endedAt: number) {
     const session = await prisma.gameSession.findUnique({
         where: {
             id: sessionId
@@ -59,8 +59,8 @@ async function finishGameSession(sessionId: number, playerName: string) {
 
     if (!session) throw new Error("Session not found")
 
-    const endTime = new Date();
-    const duration = endTime.getTime() - session?.startTime.getTime()
+
+    const duration = endedAt - session?.startTime.getTime()
 
     return await prisma.leaderBoard.create({
         data: {

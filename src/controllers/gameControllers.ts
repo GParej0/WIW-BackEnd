@@ -33,9 +33,9 @@ async function validateCharacters(req: Request, res: Response) {
 async function finishGame(req: Request, res: Response) {
 
     try {
-        const { sessionId, playerName } = req.body
+        const { sessionId, playerName, endedAt } = req.body
 
-        const data = await gameService.finishGameSession(sessionId, playerName);
+        const data = await gameService.finishGameSession(sessionId, playerName, endedAt);
 
         res.json(data)
     } catch (error) {
